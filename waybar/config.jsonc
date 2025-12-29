@@ -8,25 +8,26 @@
         "clock#2",
         "clock#3",
         "temperature",
-        "custom/music",
-        "custom/scratchOutput",
-        "hyprland/submap"
+        // "custom/music",
+        // "custom/scratchOutput",
+        // "hyprland/submap",
+        "cpu"
     ],
     "modules-center": [
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "custom/recorder",
-        "custom/wakapi",
+        // "custom/recorder",
+        // "custom/wakapi",
         "memory",
         "pulseaudio",
         // "pulseaudio/slider",
         // "custom/audio",
         "bluetooth",
         "battery",
-        "custom/notif",
+        "custom/notif"
         // "custom/easyeffects",
-        "tray"
+        // "tray"
     ],
     "hyprland/workspaces": {
         "on-scroll-up": "hyprctl dispatch workspace e+1",
@@ -34,10 +35,10 @@
     },
     "clock#1": {
         "format": "{:%a}",
-        "tooltip": false
+        "tooltip-format": "{:%A, %d %B %Y}"
     },
     "clock#2": {
-        "format": "{:%d-%m %b}",
+        "format": "{:%d-%b-%y}",
         "tooltip-format": "{calendar}",
         "calendar": {
             "mode-mon-col": 3,
@@ -53,11 +54,16 @@
             "on-click-right": "mode",
             "on-scroll-up": "shift_up",
             "on-scroll-down": "shift_down"
-        }
+        },
+        "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r"
     },
     "clock#3": {
+        "interval": 1,
         "format": "{:%I:%M %p}",
-        "tooltip": false
+        "format-alt": "{:%I:%M:%S %p}",
+        "alt-click-action": "toggle",
+        "tooltip-format": "TZ: {:%Z}",
+        "on-click": "waybar-msg action clock toggle"
     },
     "custom/wakapi": {
         "format": " {}",
@@ -69,7 +75,8 @@
         "hwmon-path": "/sys/class/hwmon/hwmon6/temp1_input",
         "interval": 0.5,
         "critical-threshold": 95,
-        "format": " {temperatureC}°C"
+        "format": " {temperatureC}°C",
+        "tooltip-format": "  {temperatureF}°F"
     },
     "custom/scratchOutput": {
         "return-type": "json",
@@ -141,7 +148,7 @@
         "on-scroll-down": "pamixer -d  2 --allow-boost"
     },
     "memory": {
-        "interval": 5,
+        "interval": 1,
         "format": "  {}%",
         "on-click": "foot -e btop",
         "states": {
@@ -166,7 +173,7 @@
         // "tooltip-format": "Bluetooth: {status}"
     },
     "cpu": {
-        "interval": 10,
+        "interval": 5,
         "format": "  {usage}%",
         "states": {
             "cool": 30,
