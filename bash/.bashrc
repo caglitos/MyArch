@@ -13,6 +13,8 @@ alias cls='clear; fastfetch'
 alias matrix='cmatrix'
 alias quit='exit'
 alias q='exit'
+alias river='dbus-run-session river'
+alias hypr='start-hyprland'
 
 # MongoDB shortcuts
 alias mongo-on='sudo systemctl start mongodb'
