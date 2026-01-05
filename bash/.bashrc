@@ -14,6 +14,8 @@ alias matrix='cmatrix'
 alias q='exit'
 alias river='dbus-run-session river'
 alias hypr='start-hyprland'
+# alias cal='bc -l'
+
 
 # MongoDB shortcuts
 alias mongo-on='sudo systemctl start mongodb'
