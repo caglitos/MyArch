@@ -11,7 +11,6 @@ PS1='[\u@\h \W]\$ '
 
 alias cls='clear; fastfetch'
 alias matrix='cmatrix'
-alias quit='exit'
 alias q='exit'
 alias river='dbus-run-session river'
 alias hypr='start-hyprland'

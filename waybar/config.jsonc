@@ -72,8 +72,8 @@
         "on-click": "xdg-open https://wakapi.dev"
     },
     "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon6/temp1_input",
-        "interval": 0.5,
+        "hwmon-path": "find /sys/class/hwmon -name 'temp*_input' | xargs grep -l . | head -5 cat /sys/class/hwmon/hwmon*/name",
+        "interval": 1,
         "critical-threshold": 95,
         "format": " {temperatureC}°C",
         "tooltip-format": "  {temperatureF}°F"
