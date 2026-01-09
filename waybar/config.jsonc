@@ -150,7 +150,7 @@
     "memory": {
         "interval": 1,
         "format": "  {}%",
-        "on-click": "foot -e btop",
+        "on-click": "kitty btop",
         "states": {
             "cool": 50,
             "warning": 70,
