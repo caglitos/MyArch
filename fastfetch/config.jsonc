@@ -8,7 +8,7 @@
         }
     },
     "display": {
-        "separator": " ▸ ",
+        "separator": " ",
         "color": {
             "keys": "red",
             "title": "#d71b0c",
@@ -17,17 +17,27 @@
         }
     },
     "modules": [
+        {
+            "type": "custom",
+            "key": "﴿  I use Arch btw  ﴾"
+        },
+        "break",
         "title",
         "separator",
         "os",
         "kernel",
         "host",
         "packages",
+        {
+            "type": "command",
+            "key": "Directory",
+            "text": "printf \"%s\" \"$PWD\" | sed \"s|$HOME|~|\"",
+            "outputColor": "#a855f7"
+        },
         "separator",
         "uptime",
         "display",
         "wm",
-        "font",
         "separator",
         "poweradapter",
         "battery",

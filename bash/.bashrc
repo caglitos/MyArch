@@ -11,11 +11,14 @@ PS1='[\u@\h \W]\$ '
 
 alias cls='clear; fastfetch'
 alias matrix='cmatrix'
+alias matrixr='cmatrix -C red'
 alias q='exit'
 alias river='dbus-run-session river'
 alias hypr='start-hyprland'
+alias clock='tty-clock -c -C 2 -t'
+alias clockr='tty-clock -s -c -C 1'
+alias ghLg='bash /mnt/data/documents/dotfiles/scripts/ghlogo.sh'
 # alias cal='bc -l'
-
 
 # MongoDB shortcuts
 alias mongo-on='sudo systemctl start mongodb'
@@ -26,8 +29,6 @@ alias mongo-shell='mongosh'
 export PATH=$PATH:/bin/
 export WEBSTORM_JDK=/usr/lib/jvm/java-17-openjdk
 
-fastfetch
-
 eval "$(starship init bash)"
 
 export NVM_DIR="$HOME/.nvm"
@@ -35,3 +36,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export _JAVA_AWT_WM_NONREPARENTING=1
 export XDG_SESSION_TYPE=wayland
+
+cd ~
+
+cls
