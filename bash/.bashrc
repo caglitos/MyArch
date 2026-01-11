@@ -18,6 +18,9 @@ alias hypr='start-hyprland'
 alias clock='tty-clock -c -C 2 -t'
 alias clockr='tty-clock -s -c -C 1'
 alias ghLg='bash /mnt/data/documents/dotfiles/scripts/ghlogo.sh'
+alias ghLgr='bash /mnt/data/documents/dotfiles/scripts/ghlogo.sh -C red'
+alias archlg='bash /mnt/data/documents/dotfiles/scripts/archlogo.sh'
+alias archlgr='bash /mnt/data/documents/dotfiles/scripts/archlogo.sh -C red'
 # alias cal='bc -l'
 
 # MongoDB shortcuts
