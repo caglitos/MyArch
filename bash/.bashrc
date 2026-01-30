@@ -13,14 +13,14 @@ alias cls='clear; fastfetch'
 alias matrix='cmatrix'
 alias matrixr='cmatrix -C red'
 alias q='exit'
-alias river='dbus-run-session river'
-alias hypr='start-hyprland'
+alias river='bash /mnt/data/documents/dotfiles/scripts/gamelauncher.sh'
+alias hypr='bash /mnt/data/documents/dotfiles/scripts/hyprlauncher.sh'
 alias clock='tty-clock -c -C 2 -t'
 alias clockr='tty-clock -s -c -C 1'
-alias ghLg='bash /mnt/data/documents/dotfiles/scripts/ghlogo.sh'
-alias ghLgr='bash /mnt/data/documents/dotfiles/scripts/ghlogo.sh -C red'
-alias archlg='bash /mnt/data/documents/dotfiles/scripts/archlogo.sh'
-alias archlgr='bash /mnt/data/documents/dotfiles/scripts/archlogo.sh -C red'
+alias ghLg='bash /mnt/data/documents/dotfiles/scripts/logo/ghlogo.sh'
+alias ghLgr='bash /mnt/data/documents/dotfiles/scripts/logo/ghlogo.sh -C red'
+alias archLg='bash /mnt/data/documents/dotfiles/scripts/logo/archlogo.sh'
+alias archLgr='bash /mnt/data/documents/dotfiles/scripts/logo/archlogo.sh -C red'
 # alias cal='bc -l'
 
 # MongoDB shortcuts
@@ -38,8 +38,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export _JAVA_AWT_WM_NONREPARENTING=1
-export XDG_SESSION_TYPE=wayland
-
-cd ~
+export XDG_SESSION_TYPE=wayland0
 
 cls

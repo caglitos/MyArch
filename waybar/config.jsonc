@@ -1,16 +1,17 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 0,
-    "spacing": 7,
+    "height": 35,
+    "spacing": 5,
     "modules-left": [
-        "clock#1",
+        "custom/space",
+        "custom/arch",
+        // "clock#1",
         "clock#2",
         "clock#3",
         "temperature",
         // "custom/music",
         // "custom/scratchOutput",
-        // "hyprland/submap",
         "cpu"
     ],
     "modules-center": [
@@ -23,12 +24,41 @@
         "pulseaudio",
         // "pulseaudio/slider",
         // "custom/audio",
+        "custom/terminal",
+        "custom/reload",
         "bluetooth",
         "battery",
-        "custom/notif"
+        "custom/notif",
         // "custom/easyeffects",
         // "tray"
+        "custom/space"
     ],
+    // "custom/arch": {
+    //     "format": "  {}",
+    //     "exec": "uname -r | cut -d'-' -f1",
+    //     "tooltip-format": "Arch Linux",
+    //     "on-click": "xdg-open https://archlinux.org"
+    // },
+    "custom/space": {
+        "format": " "
+    },
+    "custom/arch": {
+        "format": "  | ",
+        "tooltip-format": "{}",
+        "exec": "fastfetch --logo none --structure OS",
+        "on-click": "/mnt/data/documents/dotfiles/scripts/systemMenu/system_menu.sh"
+    },
+    "custom/reload": {
+        "format": "",
+        "on-click": "pkill -SIGUSR2 waybar",
+        "tooltip-format": "Reload waybar"
+    },
+    "custom/terminal": {
+        "font-family": "FiraCode Nerd Font",
+        "format": "",
+        "on-click": "kitty ~",
+        "tooltip-format": "New kitty terminal"
+    },
     "hyprland/workspaces": {
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1"
@@ -65,67 +95,12 @@
         "tooltip-format": "TZ: {:%Z}",
         "on-click": "waybar-msg action clock toggle"
     },
-    "custom/wakapi": {
-        "format": " {}",
-        "interval": 600,
-        "exec": "~/.wakatime/wakatime-cli --today | awk '{print $1 \"h\", $3 \"m\"}'",
-        "on-click": "xdg-open https://wakapi.dev"
-    },
     "temperature": {
         "hwmon-path": "find /sys/class/hwmon -name 'temp*_input' | xargs grep -l . | head -5 cat /sys/class/hwmon/hwmon*/name",
         "interval": 1,
         "critical-threshold": 95,
         "format": " {temperatureC}°C",
         "tooltip-format": "  {temperatureF}°F"
-    },
-    "custom/scratchOutput": {
-        "return-type": "json",
-        "format": "{}",
-        "interval": 1,
-        "exec": "~/scripts/waybar/getScratchOutput.sh"
-    },
-    "custom/vuln": {
-        "exec": "[ -f /tmp/vuln ] && echo 󰚌",
-        "format": "{}",
-        "interval": 1,
-        "on-click": "rm /tmp/vuln"
-        // "on-click-right": "~/scripts/vuln-detect"
-    },
-    "custom/cal": {
-        "interval": 120,
-        "exec": "python3 ~/scripts/waybar/cal.py",
-        "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r"
-    },
-    "custom/recorder": {
-        "format": "{}",
-        "interval": "once",
-        "exec": "echo ' '",
-        "tooltip": "false",
-        "exec-if": "pgrep 'wl-screenrec'",
-        "on-click": "exec ~/scripts/recorder",
-        "signal": 8
-    },
-    "custom/music": {
-        "format": "{icon}{0}",
-        "format-icons": {
-            "Paused": " "
-        },
-        "escape": true,
-        "tooltip": true,
-        "exec": "~/scripts/waybar/caway-go -b 10",
-        "return-type": "json",
-        "restart-interval": 5,
-        "on-click": "playerctl play-pause -p 'spotify, %any'",
-        "on-scroll-up": "playerctl position 5+ -p 'spotify, %any'",
-        "on-scroll-down": "playerctl position 5- -p 'spotify, %any'",
-        "on-click-right": "hyprctl dispatch exec '[float] spotify'",
-        "on-click-middle": "pkill spotify; pkill waybar; waybar",
-        "max-length": 15
-    },
-    "pulseaudio/slider": {
-        "min": 300,
-        "max": 400,
-        "orientation": "horizontal"
     },
     "pulseaudio": {
         "format": "󰕾 {volume}",
@@ -134,18 +109,6 @@
         "scroll-step": 5,
         "on-click-right": "easyeffects",
         "on-click": "helvum"
-    },
-    "custom/audio": {
-        "interval": 1,
-        "return-type": "json",
-        "format": "{icon} <span class='percentage'>{volume}%</span>",
-        "exec": "printf '{\"text\":\"%s %s\",\"class\":\"%s\"}\n' \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"󰖁\" || echo \"󰕾\")\" \"$(pamixer --get-volume)\" \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"muted\" || echo \"unmuted\")\"",
-        "signal": 10,
-        "tooltip": false,
-        "on-click-right": "pavucontrol",
-        "on-click": "pamixer -t && pkill -RTMIN+10 waybar",
-        "on-scroll-up": "pamixer -i  2 --allow-boost",
-        "on-scroll-down": "pamixer -d  2 --allow-boost"
     },
     "memory": {
         "interval": 1,
@@ -216,19 +179,81 @@
         "on-click-right": "makoctl restore",
         "on-scroll-up": "~/scripts/dnd add 5",
         "on-scroll-down": "~/scripts/dnd sub 5"
-    },
-    "custom/easyeffects": {
-        "return-type": "json",
-        "exec": "pgrep easyeffects > /dev/null && echo '{\"text\": \"󱡫\", \"class\":\"enabled\"}' || echo '{\"text\": \"󱡫\", \"class\":\"disabled\"}'",
-        "on-click": "pgrep easyeffects && easyeffects -q || easyeffects --gapplication-service&",
-        "on-click-right": "easyeffects",
-        "tooltip": true,
-        "tooltip-format": "EasyEffects",
-        "format": "{}",
-        "interval": 1
-    },
-    "tray": {
-        "spacing": 5,
-        "icon-size": 20
     }
+    // "custom/wakapi": {
+    //     "format": " {}",
+    //     "interval": 600,
+    //     "exec": "~/.wakatime/wakatime-cli --today | awk '{print $1 \"h\", $3 \"m\"}'",
+    //     "on-click": "xdg-open https://wakapi.dev"
+    // },
+    // "custom/scratchOutput": {
+    //     "return-type": "json",
+    //     "format": "{}",
+    //     "interval": 1,
+    //     "exec": "~/scripts/waybar/getScratchOutput.sh"
+    // },
+    // "custom/vuln": {
+    //     "exec": "[ -f /tmp/vuln ] && echo 󰚌",
+    //     "format": "{}",
+    //     "interval": 1,
+    //     "on-click": "rm /tmp/vuln"
+    //     // "on-click-right": "~/scripts/vuln-detect"
+    // },
+    // "custom/recorder": {
+    //     "format": "{}",
+    //     "interval": "once",
+    //     "exec": "echo ' '",
+    //     "tooltip": "false",
+    //     "exec-if": "pgrep 'wl-screenrec'",
+    //     "on-click": "exec ~/scripts/recorder",
+    //     "signal": 8
+    // },
+    // "custom/music": {
+    //     "format": "{icon}{0}",
+    //     "format-icons": {
+    //         "Paused": " "
+    //     },
+    //     "escape": true,
+    //     "tooltip": true,
+    //     "exec": "~/scripts/waybar/caway-go -b 10",
+    //     "return-type": "json",
+    //     "restart-interval": 5,
+    //     "on-click": "playerctl play-pause -p 'spotify, %any'",
+    //     "on-scroll-up": "playerctl position 5+ -p 'spotify, %any'",
+    //     "on-scroll-down": "playerctl position 5- -p 'spotify, %any'",
+    //     "on-click-right": "hyprctl dispatch exec '[float] spotify'",
+    //     "on-click-middle": "pkill spotify; pkill waybar; waybar",
+    //     "max-length": 15
+    // },
+    // "pulseaudio/slider": {
+    //     "min": 300,
+    //     "max": 400,
+    //     "orientation": "horizontal"
+    // },
+    // "custom/audio": {
+    //     "interval": 1,
+    //     "return-type": "json",
+    //     "format": "{icon} <span class='percentage'>{volume}%</span>",
+    //     "exec": "printf '{\"text\":\"%s %s\",\"class\":\"%s\"}\n' \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"󰖁\" || echo \"󰕾\")\" \"$(pamixer --get-volume)\" \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"muted\" || echo \"unmuted\")\"",
+    //     "signal": 10,
+    //     "tooltip": false,
+    //     "on-click-right": "pavucontrol",
+    //     "on-click": "pamixer -t && pkill -RTMIN+10 waybar",
+    //     "on-scroll-up": "pamixer -i  2 --allow-boost",
+    //     "on-scroll-down": "pamixer -d  2 --allow-boost"
+    // },
+    // "custom/easyeffects": {
+    //     "return-type": "json",
+    //     "exec": "pgrep easyeffects > /dev/null && echo '{\"text\": \"󱡫\", \"class\":\"enabled\"}' || echo '{\"text\": \"󱡫\", \"class\":\"disabled\"}'",
+    //     "on-click": "pgrep easyeffects && easyeffects -q || easyeffects --gapplication-service&",
+    //     "on-click-right": "easyeffects",
+    //     "tooltip": true,
+    //     "tooltip-format": "EasyEffects",
+    //     "format": "{}",
+    //     "interval": 1
+    // },
+    // "tray": {
+    //     "spacing": 5,
+    //     "icon-size": 20
+    // }
 }

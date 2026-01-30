@@ -1,0 +1,114 @@
+#!/bin/sh
+
+### ─────────────────────────────
+### VARIABLES
+### ─────────────────────────────
+MOD=Super
+TERM=kitty
+
+### ─────────────────────────────
+### OUTPUTS / MONITORES
+### ─────────────────────────────
+
+# Laptop
+riverctl output eDP-1 enable
+riverctl output eDP-1 scale 1
+riverctl output eDP-1 position 0 0
+
+# Monitor externo
+riverctl output DP-1 enable
+riverctl output DP-1 scale 1
+riverctl output DP-1 position 1920 0
+riverctl output DP-1 mode preferred
+
+### ─────────────────────────────
+### TAGS (workspaces)
+### ─────────────────────────────
+
+# DP-1 → tags 1–5
+riverctl output DP-1 set-tags 0b0000011111
+
+# eDP-1 → tags 6–10
+riverctl output eDP-1 set-tags 0b1111100000
+
+### ─────────────────────────────
+### AUTOSTART
+### ─────────────────────────────
+riverctl spawn waybar
+riverctl spawn polkit-gnome-authentication-agent-1
+riverctl spawn hyprpaper
+
+### ─────────────────────────────
+### INPUT
+### ─────────────────────────────
+riverctl keyboard-layout us
+
+# Touchpad
+riverctl input touchpad tap enabled
+riverctl input touchpad natural-scroll enabled
+
+### ─────────────────────────────
+### LAYOUT
+### ─────────────────────────────
+riverctl default-layout rivertile
+rivertile \
+  --outer-padding 10 \
+  --inner-padding 2 &
+
+### ─────────────────────────────
+### KEYBINDS – APPS
+### ─────────────────────────────
+riverctl map normal $MOD Q spawn $TERM
+riverctl map normal $MOD R spawn "wofi --show drun"
+riverctl map normal $MOD E spawn thunar
+riverctl map normal $MOD S spawn "grim -g \"\$(slurp)\" - | wl-copy"
+riverctl map normal $MOD F toggle-fullscreen
+riverctl map normal $MOD M exit
+riverctl map normal $MOD A spawn "~/path/to/script/rofi_keybinds.sh"
+
+# Apps
+riverctl map normal "$MOD+Shift" W spawn webstorm
+riverctl map normal "$MOD+Shift" S spawn studio
+riverctl map normal "$MOD+Shift" T spawn warp
+riverctl map normal "$MOD+Shift" B spawn zen
+riverctl map normal "$MOD+Shift" V spawn code
+riverctl map normal "$MOD+Shift" P spawn postman
+riverctl map normal "$MOD+Shift" C spawn "xdg-open https://account.mongodb.com/account/login"
+
+### ─────────────────────────────
+### TAGS – CAMBIAR WORKSPACE
+### ─────────────────────────────
+for i in 1 2 3 4 5 6 7 8 9; do
+  riverctl map normal $MOD $i set-focused-tags $((1 << (i - 1)))
+  riverctl map normal "$MOD+Shift" $i set-view-tags $((1 << (i - 1)))
+done
+
+# Tag 10 → tecla 0
+riverctl map normal $MOD 0 set-focused-tags $((1 << 9))
+riverctl map normal "$MOD+Shift" 0 set-view-tags $((1 << 9))
+
+### ─────────────────────────────
+### FOCO ENTRE VENTANAS
+### ─────────────────────────────
+riverctl map normal $MOD H focus-view left
+riverctl map normal $MOD L focus-view right
+riverctl map normal $MOD K focus-view down
+riverctl map normal $MOD J focus-view up
+
+### ─────────────────────────────
+### CAMBIAR MONITOR
+### ─────────────────────────────
+riverctl map normal $MOD comma focus-output left
+riverctl map normal $MOD period focus-output right
+
+### ─────────────────────────────
+### MULTIMEDIA
+### ─────────────────────────────
+riverctl map normal None XF86AudioRaiseVolume spawn "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+"
+riverctl map normal None XF86AudioLowerVolume spawn "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+riverctl map normal None XF86AudioMute spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+riverctl map normal None XF86MonBrightnessUp spawn "brightnessctl set +5%"
+riverctl map normal None XF86MonBrightnessDown spawn "brightnessctl set 5%-"
+riverctl map normal None XF86MonBrightnessUp spawn "ddcutil setvcp 10 + 10"
+riverctl map normal None XF86MonBrightnessDown spawn "ddcutil setvcp 10 - 10"

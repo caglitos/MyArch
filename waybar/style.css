@@ -63,6 +63,7 @@ window#waybar {
     background: @lavender;
 }
 
+#custom-terminal,
 #bluetooth,
 #clock.1,
 #clock.3,
@@ -79,6 +80,7 @@ window#waybar {
     color: @fg;
 }
 
+#custom-reload,
 #custom-vuln,
 #custom-wakapi,
 #tray,

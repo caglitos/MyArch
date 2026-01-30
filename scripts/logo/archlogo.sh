@@ -18,4 +18,4 @@ while getopts "C:" opt; do
     esac
 done
 
-python '/mnt/data/documents/dotfiles/scripts/asccilogo.py' -C "$color" -f '/mnt/data/documents/dotfiles/assets/ghlogo.txt'
+python '/mnt/data/documents/dotfiles/scripts/logo/asccilogo.py' -C "$color" -f '/mnt/data/documents/dotfiles/assets/archlogo.txt'
