@@ -9,18 +9,23 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
+$defaultDir=/mnt/data/MyArch
+$scriptsDir=$defaultDir/scripts
+
 alias cls='clear; fastfetch'
 alias matrix='cmatrix'
 alias matrixr='cmatrix -C red'
 alias q='exit'
-alias river='bash /mnt/data/documents/dotfiles/scripts/gamelauncher.sh'
-alias hypr='bash /mnt/data/documents/dotfiles/scripts/hyprlauncher.sh'
+alias river='bash /mnt/data/MyArch/scripts/gamelauncher.sh'
+alias hypr='bash /mnt/data/MyArch/scripts/hyprlauncher.sh'
 alias clock='tty-clock -c -C 2 -t'
 alias clockr='tty-clock -s -c -C 1'
-alias ghLg='bash /mnt/data/documents/dotfiles/scripts/logo/ghlogo.sh'
-alias ghLgr='bash /mnt/data/documents/dotfiles/scripts/logo/ghlogo.sh -C red'
-alias archLg='bash /mnt/data/documents/dotfiles/scripts/logo/archlogo.sh'
-alias archLgr='bash /mnt/data/documents/dotfiles/scripts/logo/archlogo.sh -C red'
+alias ghLg='bash $scriptsDir/logo/ghlogo.sh'
+alias ghLgr='bash $scriptsDir/logo/ghlogo.sh -C red'
+alias archLg='bash $scriptsDir/logo/archlogo.sh'
+alias archLgr='bash $scriptsDir/logo/archlogo.sh -C red'
+alias lampp='sudo /opt/lampp/lampp'
+
 # alias cal='bc -l'
 
 # MongoDB shortcuts
