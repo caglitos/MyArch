@@ -1,259 +1,259 @@
 {
-    "layer": "top",
-    "position": "top",
-    "height": 35,
-    "spacing": 5,
-    "modules-left": [
-        "custom/space",
-        "custom/arch",
-        // "clock#1",
-        "clock#2",
-        "clock#3",
-        "temperature",
-        // "custom/music",
-        // "custom/scratchOutput",
-        "cpu"
-    ],
-    "modules-center": [
-        "hyprland/workspaces"
-    ],
-    "modules-right": [
-        // "custom/recorder",
-        // "custom/wakapi",
-        "memory",
-        "pulseaudio",
-        // "pulseaudio/slider",
-        // "custom/audio",
-        "custom/terminal",
-        "custom/reload",
-        "bluetooth",
-        "battery",
-        "custom/notif",
-        // "custom/easyeffects",
-        // "tray"
-        "custom/space"
-    ],
-    // "custom/arch": {
-    //     "format": "  {}",
-    //     "exec": "uname -r | cut -d'-' -f1",
-    //     "tooltip-format": "Arch Linux",
-    //     "on-click": "xdg-open https://archlinux.org"
-    // },
-    "custom/space": {
-        "format": " "
+  "layer": "top",
+  "position": "top",
+  "height": 35,
+  "spacing": 5,
+  "modules-left": [
+    "custom/space",
+    "custom/arch",
+    // "clock#1",
+    "clock#2",
+    "clock#3",
+    "temperature",
+    // "custom/music",
+    // "custom/scratchOutput",
+    "cpu",
+    "network",
+  ],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": [
+    // "custom/recorder",
+    // "custom/wakapi",
+    "memory",
+    "pulseaudio",
+    // "pulseaudio/slider",
+    // "custom/audio",
+    "custom/terminal",
+    "custom/reload",
+    "bluetooth",
+    "battery",
+    "custom/notif",
+    // "custom/easyeffects",
+    // "tray"
+    "custom/space",
+  ],
+  "network": {
+    "interface": "wlan0",
+    "format-connected": "󰤨 {essid} ({signalStrength}%)",
+    "format-ethernet": "󰤨 {ipaddr}",
+    "format-disconnected": "󰤭 Disconnected",
+    "tooltip-format": "{ifname} via {gward}\nIP: {ipaddr}",
+    "tooltip": true,
+    "interval": 5,
+  },
+  // "custom/arch": {
+  //     "format": "  {}",
+  //     "exec": "uname -r | cut -d'-' -f1",
+  //     "tooltip-format": "Arch Linux",
+  //     "on-click": "xdg-open https://archlinux.org"
+  // },
+  "custom/space": {
+    "format": " ",
+  },
+  "custom/arch": {
+    "format": "  | ",
+    "tooltip-format": "{}",
+    "exec": "fastfetch --logo none --structure OS",
+    "on-click": "/mnt/data/documents/dotfiles/scripts/systemMenu/system_menu.sh",
+  },
+  "custom/reload": {
+    "format": "",
+    "on-click": "pkill -SIGUSR2 waybar",
+    "tooltip-format": "Reload waybar",
+  },
+  "custom/terminal": {
+    "font-family": "FiraCode Nerd Font",
+    "format": "",
+    "on-click": "kitty ~",
+    "tooltip-format": "New kitty terminal",
+  },
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+  },
+  "clock#1": {
+    "format": "{:%a}",
+    "tooltip-format": "{:%A, %d %B %Y}",
+  },
+  "clock#2": {
+    "format": "{:%d-%b-%y}",
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#89b4fa'><b>{}</b></span>",
+        "days": "<span color='#f5c2e7'><b>{}</b></span>",
+        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b><u>{}</u></b></span>",
+      },
     },
-    "custom/arch": {
-        "format": "  | ",
-        "tooltip-format": "{}",
-        "exec": "fastfetch --logo none --structure OS",
-        "on-click": "/mnt/data/documents/dotfiles/scripts/systemMenu/system_menu.sh"
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
     },
-    "custom/reload": {
-        "format": "",
-        "on-click": "pkill -SIGUSR2 waybar",
-        "tooltip-format": "Reload waybar"
+    "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r",
+  },
+  "clock#3": {
+    "interval": 1,
+    "format": "{:%I:%M %p}",
+    "format-alt": "{:%I:%M:%S %p}",
+    "alt-click-action": "toggle",
+    "tooltip-format": "TZ: {:%Z}",
+    "on-click": "waybar-msg action clock toggle",
+  },
+  "temperature": {
+    "hwmon-path": "find /sys/class/hwmon -name 'temp*_input' | xargs grep -l . | head -5 cat /sys/class/hwmon/hwmon*/name",
+    "interval": 1,
+    "critical-threshold": 95,
+    "format": " {temperatureC}°C",
+    "tooltip-format": "  {temperatureF}°F",
+  },
+  "pulseaudio": {
+    "format": "󰕾 {volume}",
+    "format-muted": "󰖁 {volume}",
+    "tooltip": false,
+    "scroll-step": 5,
+    "on-click-right": "helvum",
+    "on-click": "pavucontrol",
+  },
+  "memory": {
+    "interval": 1,
+    "format": "  {}%",
+    "on-click": "kitty btop",
+    "states": {
+      "cool": 50,
+      "warning": 70,
+      "critical": 90,
     },
-    "custom/terminal": {
-        "font-family": "FiraCode Nerd Font",
-        "format": "",
-        "on-click": "kitty ~",
-        "tooltip-format": "New kitty terminal"
+  },
+  "bluetooth": {
+    "interval": 1,
+    "format-on": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-connected-battery": "󰂯 {device_battery_percentage}%",
+    "tooltip-format-connected": "{num_connections} connected\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    // "on-click": "bluetoothctl <<< $(bluetoothctl show | awk '/Powered:/ {print ($2 ~ /yes|on/) ? \"power off\" : \"power on\"; exit}')",
+    "on-click": "~/.config/scripts/bluetooth-menu.sh",
+    "on-click-right": "blueman-manager",
+    // "tooltip-format": "Bluetooth: {status}"
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "  {usage}%",
+    "states": {
+      "cool": 30,
+      "warning": 70,
+      "critical": 90,
     },
-    "hyprland/workspaces": {
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+  "battery": {
+    "interval": 2,
+    "states": {
+      "warning": 30,
+      "critical": 15,
     },
-    "clock#1": {
-        "format": "{:%a}",
-        "tooltip-format": "{:%A, %d %B %Y}"
-    },
-    "clock#2": {
-        "format": "{:%d-%b-%y}",
-        "tooltip-format": "{calendar}",
-        "calendar": {
-            "mode-mon-col": 3,
-            "on-scroll": 1,
-            "format": {
-                "months": "<span color='#89b4fa'><b>{}</b></span>",
-                "days": "<span color='#f5c2e7'><b>{}</b></span>",
-                "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
-                "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
-            }
-        },
-        "actions": {
-            "on-click-right": "mode",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        },
-        "on-click": "xdg-open https://calendar.google.com/calendar/u/0/r"
-    },
-    "clock#3": {
-        "interval": 1,
-        "format": "{:%I:%M %p}",
-        "format-alt": "{:%I:%M:%S %p}",
-        "alt-click-action": "toggle",
-        "tooltip-format": "TZ: {:%Z}",
-        "on-click": "waybar-msg action clock toggle"
-    },
-    "temperature": {
-        "hwmon-path": "find /sys/class/hwmon -name 'temp*_input' | xargs grep -l . | head -5 cat /sys/class/hwmon/hwmon*/name",
-        "interval": 1,
-        "critical-threshold": 95,
-        "format": " {temperatureC}°C",
-        "tooltip-format": "  {temperatureF}°F"
-    },
-    "pulseaudio": {
-        "format": "󰕾 {volume}",
-        "format-muted": "󰖁 {volume}",
-        "tooltip": false,
-        "scroll-step": 5,
-        "on-click-right": "easyeffects",
-        "on-click": "helvum"
-    },
-    "memory": {
-        "interval": 1,
-        "format": "  {}%",
-        "on-click": "kitty btop",
-        "states": {
-            "cool": 50,
-            "warning": 70,
-            "critical": 90
-        }
-    },
-    "bluetooth": {
-        "interval": 1,
-        "format-on": "󰂯",
-        "format-off": "󰂲",
-        "format-disabled": "󰂲",
-        "format-connected": "󰂱",
-        "format-connected-battery": "󰂯 {device_battery_percentage}%",
-        "tooltip-format-connected": "{num_connections} connected\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-        // "on-click": "bluetoothctl <<< $(bluetoothctl show | awk '/Powered:/ {print ($2 ~ /yes|on/) ? \"power off\" : \"power on\"; exit}')",
-        "on-click": "~/.config/scripts/bluetooth-menu.sh",
-        "on-click-right": "blueman-manager"
-        // "tooltip-format": "Bluetooth: {status}"
-    },
-    "cpu": {
-        "interval": 5,
-        "format": "  {usage}%",
-        "states": {
-            "cool": 30,
-            "warning": 70,
-            "critical": 90
-        }
-    },
-    "battery": {
-        "interval": 2,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format-discharging": "{icon} {capacity}% {time}",
-        "format-charging": "{icon} {capacity}% {time}",
-        "format-not-charging": "{icon} {capacity}% {time}",
-        "format-plugged": "{icon} {capacity}%",
-        "format-full": "󰁹",
-        "format-time": "{H}h{M:2}m",
-        "format-icons": [
-            "󰂎",
-            "󰁻",
-            "󰁼",
-            "󰁽",
-            "󰁿",
-            "󰂁",
-            "󰁹"
-        ],
-        "tooltip-format-discharging": "Using {power:4.1f}W",
-        "tooltip-format-plugged": "Using {power:4.1f}W",
-        "tooltip-format-charging": "Charging {power:4.1f}W"
-    },
-    "custom/notif": {
-        "exec": "~/scripts/waybar/notif_display.sh",
-        "return-type": "json",
-        "format": "{}",
-        "interval": "once",
-        "signal": 8,
-        "on-click": "~/scripts/dnd toggle",
-        "on-click-right": "makoctl restore",
-        "on-scroll-up": "~/scripts/dnd add 5",
-        "on-scroll-down": "~/scripts/dnd sub 5"
-    }
-    // "custom/wakapi": {
-    //     "format": " {}",
-    //     "interval": 600,
-    //     "exec": "~/.wakatime/wakatime-cli --today | awk '{print $1 \"h\", $3 \"m\"}'",
-    //     "on-click": "xdg-open https://wakapi.dev"
-    // },
-    // "custom/scratchOutput": {
-    //     "return-type": "json",
-    //     "format": "{}",
-    //     "interval": 1,
-    //     "exec": "~/scripts/waybar/getScratchOutput.sh"
-    // },
-    // "custom/vuln": {
-    //     "exec": "[ -f /tmp/vuln ] && echo 󰚌",
-    //     "format": "{}",
-    //     "interval": 1,
-    //     "on-click": "rm /tmp/vuln"
-    //     // "on-click-right": "~/scripts/vuln-detect"
-    // },
-    // "custom/recorder": {
-    //     "format": "{}",
-    //     "interval": "once",
-    //     "exec": "echo ' '",
-    //     "tooltip": "false",
-    //     "exec-if": "pgrep 'wl-screenrec'",
-    //     "on-click": "exec ~/scripts/recorder",
-    //     "signal": 8
-    // },
-    // "custom/music": {
-    //     "format": "{icon}{0}",
-    //     "format-icons": {
-    //         "Paused": " "
-    //     },
-    //     "escape": true,
-    //     "tooltip": true,
-    //     "exec": "~/scripts/waybar/caway-go -b 10",
-    //     "return-type": "json",
-    //     "restart-interval": 5,
-    //     "on-click": "playerctl play-pause -p 'spotify, %any'",
-    //     "on-scroll-up": "playerctl position 5+ -p 'spotify, %any'",
-    //     "on-scroll-down": "playerctl position 5- -p 'spotify, %any'",
-    //     "on-click-right": "hyprctl dispatch exec '[float] spotify'",
-    //     "on-click-middle": "pkill spotify; pkill waybar; waybar",
-    //     "max-length": 15
-    // },
-    // "pulseaudio/slider": {
-    //     "min": 300,
-    //     "max": 400,
-    //     "orientation": "horizontal"
-    // },
-    // "custom/audio": {
-    //     "interval": 1,
-    //     "return-type": "json",
-    //     "format": "{icon} <span class='percentage'>{volume}%</span>",
-    //     "exec": "printf '{\"text\":\"%s %s\",\"class\":\"%s\"}\n' \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"󰖁\" || echo \"󰕾\")\" \"$(pamixer --get-volume)\" \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"muted\" || echo \"unmuted\")\"",
-    //     "signal": 10,
-    //     "tooltip": false,
-    //     "on-click-right": "pavucontrol",
-    //     "on-click": "pamixer -t && pkill -RTMIN+10 waybar",
-    //     "on-scroll-up": "pamixer -i  2 --allow-boost",
-    //     "on-scroll-down": "pamixer -d  2 --allow-boost"
-    // },
-    // "custom/easyeffects": {
-    //     "return-type": "json",
-    //     "exec": "pgrep easyeffects > /dev/null && echo '{\"text\": \"󱡫\", \"class\":\"enabled\"}' || echo '{\"text\": \"󱡫\", \"class\":\"disabled\"}'",
-    //     "on-click": "pgrep easyeffects && easyeffects -q || easyeffects --gapplication-service&",
-    //     "on-click-right": "easyeffects",
-    //     "tooltip": true,
-    //     "tooltip-format": "EasyEffects",
-    //     "format": "{}",
-    //     "interval": 1
-    // },
-    // "tray": {
-    //     "spacing": 5,
-    //     "icon-size": 20
-    // }
+    "format-discharging": "{icon} {capacity}% {time}",
+    "format-charging": "{icon} {capacity}% {time}",
+    "format-not-charging": "{icon} {capacity}% {time}",
+    "format-plugged": "{icon} {capacity}%",
+    "format-full": "󰁹",
+    "format-time": "{H}h{M:2}m",
+    "format-icons": ["󰂎", "󰁻", "󰁼", "󰁽", "󰁿", "󰂁", "󰁹"],
+    "tooltip-format-discharging": "Using {power:4.1f}W",
+    "tooltip-format-plugged": "Using {power:4.1f}W",
+    "tooltip-format-charging": "Charging {power:4.1f}W",
+  },
+  "custom/notif": {
+    "exec": "~/scripts/waybar/notif_display.sh",
+    "return-type": "json",
+    "format": "{}",
+    "interval": "once",
+    "signal": 8,
+    "on-click": "~/scripts/dnd toggle",
+    "on-click-right": "makoctl restore",
+    "on-scroll-up": "~/scripts/dnd add 5",
+    "on-scroll-down": "~/scripts/dnd sub 5",
+  },
+  // "custom/wakapi": {
+  //     "format": " {}",
+  //     "interval": 600,
+  //     "exec": "~/.wakatime/wakatime-cli --today | awk '{print $1 \"h\", $3 \"m\"}'",
+  //     "on-click": "xdg-open https://wakapi.dev"
+  // },
+  // "custom/scratchOutput": {
+  //     "return-type": "json",
+  //     "format": "{}",
+  //     "interval": 1,
+  //     "exec": "~/scripts/waybar/getScratchOutput.sh"
+  // },
+  // "custom/vuln": {
+  //     "exec": "[ -f /tmp/vuln ] && echo 󰚌",
+  //     "format": "{}",
+  //     "interval": 1,
+  //     "on-click": "rm /tmp/vuln"
+  //     // "on-click-right": "~/scripts/vuln-detect"
+  // },
+  // "custom/recorder": {
+  //     "format": "{}",
+  //     "interval": "once",
+  //     "exec": "echo ' '",
+  //     "tooltip": "false",
+  //     "exec-if": "pgrep 'wl-screenrec'",
+  //     "on-click": "exec ~/scripts/recorder",
+  //     "signal": 8
+  // },
+  // "custom/music": {
+  //     "format": "{icon}{0}",
+  //     "format-icons": {
+  //         "Paused": " "
+  //     },
+  //     "escape": true,
+  //     "tooltip": true,
+  //     "exec": "~/scripts/waybar/caway-go -b 10",
+  //     "return-type": "json",
+  //     "restart-interval": 5,
+  //     "on-click": "playerctl play-pause -p 'spotify, %any'",
+  //     "on-scroll-up": "playerctl position 5+ -p 'spotify, %any'",
+  //     "on-scroll-down": "playerctl position 5- -p 'spotify, %any'",
+  //     "on-click-right": "hyprctl dispatch exec '[float] spotify'",
+  //     "on-click-middle": "pkill spotify; pkill waybar; waybar",
+  //     "max-length": 15
+  // },
+  // "pulseaudio/slider": {
+  //     "min": 300,
+  //     "max": 400,
+  //     "orientation": "horizontal"
+  // },
+  // "custom/audio": {
+  //     "interval": 1,
+  //     "return-type": "json",
+  //     "format": "{icon} <span class='percentage'>{volume}%</span>",
+  //     "exec": "printf '{\"text\":\"%s %s\",\"class\":\"%s\"}\n' \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"󰖁\" || echo \"󰕾\")\" \"$(pamixer --get-volume)\" \"$([[ $(pamixer --get-volume-human) == \"muted\" ]] && echo \"muted\" || echo \"unmuted\")\"",
+  //     "signal": 10,
+  //     "tooltip": false,
+  //     "on-click-right": "pavucontrol",
+  //     "on-click": "pamixer -t && pkill -RTMIN+10 waybar",
+  //     "on-scroll-up": "pamixer -i  2 --allow-boost",
+  //     "on-scroll-down": "pamixer -d  2 --allow-boost"
+  // },
+  // "custom/easyeffects": {
+  //     "return-type": "json",
+  //     "exec": "pgrep easyeffects > /dev/null && echo '{\"text\": \"󱡫\", \"class\":\"enabled\"}' || echo '{\"text\": \"󱡫\", \"class\":\"disabled\"}'",
+  //     "on-click": "pgrep easyeffects && easyeffects -q || easyeffects --gapplication-service&",
+  //     "on-click-right": "easyeffects",
+  //     "tooltip": true,
+  //     "tooltip-format": "EasyEffects",
+  //     "format": "{}",
+  //     "interval": 1
+  // },
+  // "tray": {
+  //     "spacing": 5,
+  //     "icon-size": 20
+  // }
 }

@@ -112,3 +112,11 @@ riverctl map normal None XF86MonBrightnessUp spawn "brightnessctl set +5%"
 riverctl map normal None XF86MonBrightnessDown spawn "brightnessctl set 5%-"
 riverctl map normal None XF86MonBrightnessUp spawn "ddcutil setvcp 10 + 10"
 riverctl map normal None XF86MonBrightnessDown spawn "ddcutil setvcp 10 - 10"
+
+# Mouse sensitivity (reduce by 20%)
+riverctl input pointer accel-profile flat
+riverctl input pointer pointer-accel -0.2
+
+# Touchpad (invert scroll)
+riverctl input touchpad natural-scroll disabled
+riverctl input touchpad scroll-factor -1.0

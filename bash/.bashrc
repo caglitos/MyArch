@@ -25,6 +25,9 @@ alias ghLgr='bash $scriptsDir/logo/ghlogo.sh -C red'
 alias archLg='bash $scriptsDir/logo/archlogo.sh'
 alias archLgr='bash $scriptsDir/logo/archlogo.sh -C red'
 alias lampp='sudo /opt/lampp/lampp'
+alias hiber='sudo systemctl start hibernate.target'
+alias sth='sudo systemctl start suspend-then-hibernate.target'
+alias screnshot='grim -g "$(slurp)" - | swappy -f -'
 
 # alias cal='bc -l'
 

@@ -3,7 +3,6 @@
 # 🟢 RESTAURAR SERVICIOS
 SERVICES=(
   bluetooth
-  ollama
   rtkit-daemon
   upower
   systemd-timesyncd
